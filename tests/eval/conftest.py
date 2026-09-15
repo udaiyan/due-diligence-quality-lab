@@ -35,7 +35,7 @@ def happy_output() -> InvestigationOutput:
         ),
         sources=(
             Source(id="src1", url="https://find-and-update.company-information.service.gov.uk/company/09876543",
-                   tier=1, retrieved_at=datetime(2026, 3, 20), published_at=datetime(2026, 1, 1),
+                   tier=1, retrieved_at=datetime(2026, 3, 20), published_at=datetime(2015, 5, 12),
                    publisher="Companies House"),
         ),
         risk_scores=tuple(
