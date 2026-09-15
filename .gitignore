@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+uv.lock
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+reports/
+traces/
+test-results/
+baseline.json
+.env
+.env.*
+.DS_Store

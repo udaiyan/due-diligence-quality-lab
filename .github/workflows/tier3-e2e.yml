@@ -1,0 +1,47 @@
+name: T3 — E2E matrix
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard: [1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+      - run: uv sync --frozen --extra dev
+      - run: uv run playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run E2E shard
+        env:
+          DDQL_TEST_PASSWORD: ${{ secrets.DDQL_TEST_PASSWORD }}
+          DDQL_BASE_URL: ${{ vars.STAGING_URL }}
+        run: |
+          uv run pytest tests/e2e \
+            --browser ${{ matrix.browser }} \
+            --splits 3 --group ${{ matrix.shard }} \
+            --tracing retain-on-failure \
+            --junitxml=reports/junit-${{ matrix.browser }}-${{ matrix.shard }}.xml
+
+      - name: Triage failures
+        if: failure()
+        run: |
+          uv run python -m ddql.ci.flake_triage \
+            --junit reports/junit-${{ matrix.browser }}-${{ matrix.shard }}.xml \
+            --traces test-results/ \
+            --autofile-issues
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: traces-${{ matrix.browser }}-${{ matrix.shard }}
+          path: test-results/

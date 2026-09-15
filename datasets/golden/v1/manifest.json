@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "created": "2026-01-10T09:00:00Z",
+  "hash": "sha256:0000000000000000",
+  "case_count": 0,
+  "changelog": [
+    "v1: initial empty scaffold; superseded by v2"
+  ],
+  "owners": ["quality-eng"]
+}
