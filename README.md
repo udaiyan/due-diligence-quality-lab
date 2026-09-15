@@ -148,13 +148,14 @@ uv run python scripts/run_eval.py \
   --outputs examples/outputs.sample.json \
   --report reports/run.json
 ```
+
 The `examples/outputs.sample.json` file contains three hand-written
 investigation outputs matching three golden cases — two clean, one
 deliberately failing, so the harness can be seen catching real problems.
 The L2 (LLM-as-judge) layer additionally requires `--extra anthropic`,
 `ANTHROPIC_API_KEY`, and `DDQL_JUDGE=anthropic`. On PowerShell, use
 backticks for line continuation and set env vars with `$env:NAME = "value"`.
----
+
 
 ## Design decisions
 
