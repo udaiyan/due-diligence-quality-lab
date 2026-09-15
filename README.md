@@ -1,9 +1,8 @@
 # Due Diligence Quality Lab
 
-> **The craft is knowing when a green tick is lying.**
 
-Quality infrastructure for a due-diligence platform where the output is a
-**risk report** — entities, claims, citations, risk scores, and a timeline —
+Darren's Quality infrastructure demo for a due-diligence platform where the output is a
+**risk report** - entities, claims, citations, risk scores, and a timeline -
 assembled by a non-deterministic system from open sources and structured
 compliance data.
 
@@ -18,7 +17,7 @@ correctly-grounded but out-of-order event is still wrong.
 ## What this repo assumes about the domain
 
 The output under test is a **structured risk report**, not a chatbot reply.
-That assumption drives every design choice in the codebase.
+That assumption drives every design choice in this demo.
 
 **Six customer segments**, each asking a different risk question:
 
@@ -44,7 +43,7 @@ hallucination metric is a gate.
 
 ---
 
-## How this maps to a quality engineer role
+## How this demo maps to a quality engineer role
 
 | Typical requirement | Where it lives | Proof |
 |---|---|---|
@@ -155,5 +154,5 @@ DDQL_JUDGE=anthropic uv run python scripts/run_eval.py \
 
 ---
 
-*Built by a quality engineer who thinks the most interesting problem in AI
-right now is **how you know when it's wrong**.*
+*Built by a Darren U for the most interesting problem in AI
+right which is **how you know when it's wrong**.*
