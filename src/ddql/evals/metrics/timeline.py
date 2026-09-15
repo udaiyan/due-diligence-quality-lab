@@ -102,6 +102,18 @@ def _date_precision_honesty(
 def _anachronism_rate(
     events: Sequence[TimelineEvent], sources: Sequence[Source]
 ) -> float:
+    """Fraction of dated events whose date is AFTER their earliest cited
+    source's publication.
+
+    A source published in 2015 cannot support an event dated 2020 — it
+    cannot know about the future. The inverse (event before source) is
+    not anachronistic: a 2022 news article legitimately documents a 1971
+    birth, and a 2021 Companies House filing legitimately records a 2015
+    directorship.
+
+    The earlier version of this check had the comparison inverted, which
+    flagged retrospective sourcing as anachronism. See ADR-005.
+    """
     dated = [e for e in events if e.date is not None]
     if not dated:
         return 0.0
@@ -115,7 +127,8 @@ def _anachronism_rate(
                 pubs.append(src.published_at)
         if not pubs:
             continue
-        if e.date is not None and e.date < min(pubs).date():
+        earliest = min(pubs)
+        if e.date > earliest.date():
             anachronistic += 1
     return anachronistic / len(dated)
 

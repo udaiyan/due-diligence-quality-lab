@@ -129,20 +129,32 @@ because the metrics are segment-aware and framework-aware.
 
 ## Quick start
 
-```bash
-git clone https://github.com/<you>/due-diligence-quality-lab
-cd due-diligence-quality-lab
-uv sync
 
+Requires [`uv`](https://docs.astral.sh/uv/).
+
+```bash
+uv sync --extra dev
+
+# Does the harness work?
 uv run pytest tests/unit
 uv run pytest tests/eval -m smoke
 
-DDQL_JUDGE=anthropic uv run python scripts/run_eval.py \
+# Run the deterministic layers (L0+L1) over the golden set.
+# Requires a JSON file of investigation outputs keyed by case id —
+# see examples/outputs.sample.json.
+uv run python scripts/run_eval.py \
   --dataset datasets/golden/v2 \
-  --layers L0,L1,L2 \
-  --report reports/$(date +%F).json
+  --layers L0,L1 \
+  --outputs examples/outputs.sample.json \
+  --report reports/run.json
 ```
+The `examples/outputs.sample.json` file contains three hand-written
+investigation outputs matching three golden cases — two clean, one
+deliberately failing, so the harness can be seen catching real problems.
 
+The L2 (LLM-as-judge) layer additionally requires `--extra anthropic`,
+`ANTHROPIC_API_KEY`, and `DDQL_JUDGE=anthropic`. On PowerShell, use
+backticks for line continuation and set env vars with `$env:NAME = "value"`.
 ---
 
 ## Design decisions

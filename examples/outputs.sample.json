@@ -1,0 +1,254 @@
+{
+  "corp-supplier-0001": {
+    "case_id": "corp-supplier-0001",
+    "tenant": "global-500-eu",
+    "segment": "corporate",
+    "risk_framework_id": "corporate_supplier@v2",
+    "executive_summary": "Northwind Holdings Ltd is UK-registered, with Marek Dvorak holding a 62% controlling interest. One resolved regulatory matter from 2019; no current integrity, sanctions, or continuity concerns identified.",
+    "claims": [
+      {
+        "id": "cl-reg",
+        "text": "Northwind Holdings Ltd is registered in the UK with Companies House number 09876543.",
+        "citation_ids": ["src-ch-reg"],
+        "salience": 1.0
+      },
+      {
+        "id": "cl-psc",
+        "text": "Marek Dvorak holds 62% of shares as a person with significant control, per the Companies House PSC register.",
+        "citation_ids": ["src-ch-psc"],
+        "salience": 1.0
+      },
+      {
+        "id": "cl-incident",
+        "text": "A 2019 regulatory matter was resolved without enforcement action.",
+        "citation_ids": ["src-press"],
+        "salience": 0.7,
+        "risk_category": "integrity"
+      },
+      {
+        "id": "cl-address",
+        "text": "The registered address was updated in April 2023.",
+        "citation_ids": ["src-ch-address"],
+        "salience": 0.5
+      },
+      {
+        "id": "cl-career",
+        "text": "Marek Dvorak's public record shows a business career since the mid-1990s.",
+        "citation_ids": ["src-wd"],
+        "salience": 0.4
+      }
+    ],
+    "entities": [
+      {
+        "name": "Northwind Holdings Ltd",
+        "kind": "org",
+        "identifiers": {"companies_house": "09876543"},
+        "confidence": 0.97
+      },
+      {
+        "name": "Marek Dvorak",
+        "kind": "person",
+        "identifiers": {"wikidata": "Q1234567"},
+        "confidence": 0.92,
+        "disambiguation_hint": "uk-business-1995-present"
+      }
+    ],
+    "sources": [
+      {
+        "id": "src-ch-reg",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/09876543",
+        "tier": 1,
+        "retrieved_at": "2026-03-20T10:15:00",
+        "published_at": "2015-05-12T00:00:00",
+        "publisher": "Companies House"
+      },
+      {
+        "id": "src-ch-psc",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/09876543/persons-with-significant-control",
+        "tier": 1,
+        "retrieved_at": "2026-03-20T10:16:00",
+        "published_at": "2021-09-15T00:00:00",
+        "publisher": "Companies House"
+      },
+      {
+        "id": "src-ch-address",
+        "url": "https://find-and-update.company-information.service.gov.uk/company/09876543/filing-history",
+        "tier": 1,
+        "retrieved_at": "2026-03-20T10:17:00",
+        "published_at": "2023-04-10T00:00:00",
+        "publisher": "Companies House"
+      },
+      {
+        "id": "src-press",
+        "url": "https://example.com/trade-press/northwind-2019-matter-resolved",
+        "tier": 2,
+        "retrieved_at": "2026-03-20T10:18:00",
+        "published_at": "2019-06-15T00:00:00",
+        "publisher": "Trade Weekly"
+      },
+      {
+        "id": "src-wd",
+        "url": "https://www.wikidata.org/wiki/Q1234567",
+        "tier": 2,
+        "retrieved_at": "2026-03-20T10:19:00",
+        "published_at": "2020-01-01T00:00:00",
+        "publisher": "Wikidata"
+      }
+    ],
+    "risk_scores": [
+      {"category": "integrity", "score": 24.0, "severity": "low", "confidence": 0.85, "rationale": "One 2019 regulatory matter, resolved without enforcement. No current adverse media or sanctions findings.", "citation_ids": ["cl-incident", "cl-reg"]},
+      {"category": "esg", "score": 15.0, "severity": "low", "confidence": 0.80, "rationale": "No ESG controversies identified in the sources found.", "citation_ids": ["cl-reg"]},
+      {"category": "cybersecurity", "score": 20.0, "severity": "low", "confidence": 0.75, "rationale": "No public breach history or credential-dump exposure identified.", "citation_ids": ["cl-reg"]},
+      {"category": "financial", "score": 22.0, "severity": "low", "confidence": 0.80, "rationale": "No insolvency events, late filings, or adverse credit events.", "citation_ids": ["cl-reg"]},
+      {"category": "geopolitical", "score": 10.0, "severity": "low", "confidence": 0.90, "rationale": "All ownership and operations in the UK.", "citation_ids": ["cl-reg", "cl-psc"]},
+      {"category": "quality", "score": 12.0, "severity": "low", "confidence": 0.75, "rationale": "No product recalls or regulatory quality findings.", "citation_ids": ["cl-reg"]},
+      {"category": "business_continuity", "score": 18.0, "severity": "low", "confidence": 0.70, "rationale": "Single principal owner but no concentration flags beyond normal.", "citation_ids": ["cl-psc"]}
+    ],
+    "timeline": [
+      {"id": "evt-inc-2019", "description": "Regulatory matter resolved without enforcement action", "date": "2019-06-15", "date_precision": "day", "event_type": "regulatory", "citation_ids": ["src-press"], "salience": 0.7},
+      {"id": "evt-psc-2021", "description": "PSC register updated - Marek Dvorak at 62%", "date": "2021-09-15", "date_precision": "day", "event_type": "ownership", "citation_ids": ["src-ch-psc"], "salience": 1.0},
+      {"id": "evt-address-2023", "description": "Registered address changed", "date": "2023-04-10", "date_precision": "day", "event_type": "filing", "citation_ids": ["src-ch-address"], "salience": 0.5}
+    ]
+  },
+
+  "law-client-0114": {
+    "case_id": "law-client-0114",
+    "tenant": "mena-law-firm",
+    "segment": "law_firm",
+    "risk_framework_id": "law_firm_client@v1",
+    "executive_summary": "Viktor Petrov (b. 1971, Sevastopol) is designated under EU sanctions regime EU-2022-0431 and appears on the OFAC SDN list. Designation relates to financial sanctions circumvention allegations. Recommend declining engagement pending senior compliance review.",
+    "claims": [
+      {"id": "cl-sanctions-eu", "text": "Viktor Petrov (b. 1971, Sevastopol) is designated under EU sanctions regime reference EU-2022-0431.", "citation_ids": ["src-eu-sanctions"], "salience": 1.0, "risk_category": "sanctions"},
+      {"id": "cl-sanctions-ofac", "text": "The same individual appears on the OFAC SDN list.", "citation_ids": ["src-ofac"], "salience": 1.0, "risk_category": "sanctions"},
+      {"id": "cl-pep", "text": "Subject holds or has held a regional political role.", "citation_ids": ["src-press-1"], "salience": 0.7, "risk_category": "pep"},
+      {"id": "cl-aml", "text": "Designation relates to allegations of financial sanctions circumvention.", "citation_ids": ["src-eu-sanctions"], "salience": 0.8, "risk_category": "aml_abc"}
+    ],
+    "entities": [
+      {"name": "Viktor Petrov", "kind": "person", "identifiers": {"sanctions_id": "EU-2022-0431"}, "confidence": 0.94, "disambiguation_hint": "b.1971-sevastopol"}
+    ],
+    "sources": [
+      {"id": "src-eu-sanctions", "url": "https://example.eu/sanctions/consolidated/2022/0431", "tier": 1, "retrieved_at": "2026-03-20T11:00:00", "published_at": "2022-03-15T00:00:00", "publisher": "EU Consolidated Sanctions List"},
+      {"id": "src-ofac", "url": "https://example.gov/ofac/sdn/2022/04", "tier": 1, "retrieved_at": "2026-03-20T11:01:00", "published_at": "2022-04-01T00:00:00", "publisher": "OFAC SDN List"},
+      {"id": "src-press-1", "url": "https://example.com/reuters/2022/petrov-designation", "tier": 2, "retrieved_at": "2026-03-20T11:02:00", "published_at": "2022-03-16T00:00:00", "publisher": "Reuters"}
+    ],
+    "risk_scores": [
+      {"category": "sanctions", "score": 95.0, "severity": "critical", "confidence": 0.95, "rationale": "Direct designation on EU and OFAC sanctions lists.", "citation_ids": ["cl-sanctions-eu", "cl-sanctions-ofac"]},
+      {"category": "pep", "score": 45.0, "severity": "medium", "confidence": 0.70, "rationale": "Regional political role reported.", "citation_ids": ["cl-pep"]},
+      {"category": "adverse_media", "score": 55.0, "severity": "medium", "confidence": 0.80, "rationale": "Significant adverse coverage around designation.", "citation_ids": ["cl-sanctions-eu"]},
+      {"category": "source_of_wealth", "score": 65.0, "severity": "medium", "confidence": 0.70, "rationale": "Stated source of wealth not independently corroborated.", "citation_ids": ["cl-sanctions-eu", "cl-aml"]},
+      {"category": "aml_abc", "score": 70.0, "severity": "high", "confidence": 0.75, "rationale": "Designation relates to sanctions circumvention allegations.", "citation_ids": ["cl-aml"]},
+      {"category": "esg", "score": 20.0, "severity": "low", "confidence": 0.60, "rationale": "No separate ESG findings in the sources found.", "citation_ids": ["cl-sanctions-eu"]}
+    ],
+    "timeline": [
+      {"id": "evt-dob-1971", "description": "Subject born in Sevastopol", "date": "1971-01-01", "date_precision": "year", "event_type": "birth", "citation_ids": ["src-press-1"], "salience": 1.0},
+      {"id": "evt-eu-listing-2022", "description": "Added to EU consolidated sanctions list", "date": "2022-03-15", "date_precision": "day", "event_type": "sanction", "citation_ids": ["src-eu-sanctions"], "salience": 1.0},
+      {"id": "evt-ofac-listing-2022", "description": "Added to OFAC SDN list", "date": "2022-04-01", "date_precision": "day", "event_type": "sanction", "citation_ids": ["src-ofac"], "salience": 1.0}
+    ]
+  },
+
+  "bank-hnw-0087": {
+    "case_id": "bank-hnw-0087",
+    "tenant": "private-bank-1",
+    "segment": "private_bank",
+    "risk_framework_id": "private_bank_hnw@v1",
+    "executive_summary": "Isabella Ferretti (b. 1968, Milan) is the fashion-industry founder confirmed via Wikidata Q5678901, not the finance-sector individual of the same name. Career, directorship, and philanthropic record are consistent and independently sourced. Source of wealth is partially corroborated. No sanctions or PEP matches.",
+    "claims": [
+      {"id": "cl-bio", "text": "Isabella Ferretti was born in Milan in 1968.", "citation_ids": ["src-wd"], "salience": 0.8},
+      {"id": "cl-career", "text": "Ferretti founded a fashion house in 1994 and led it through its 2007 IPO on the Milan exchange.", "citation_ids": ["src-sole", "src-ch-profile"], "salience": 1.0},
+      {"id": "cl-directorship", "text": "Ferretti holds a non-executive directorship at a UK-registered retail group, recorded since 2019.", "citation_ids": ["src-ch-directorship"], "salience": 1.0, "risk_category": "business_associations"},
+      {"id": "cl-philanthropy", "text": "Ferretti's philanthropic activity centres on arts and design education.", "citation_ids": ["src-sole"], "salience": 0.5},
+      {"id": "cl-sow", "text": "The stated source of wealth is the 1994 founding and subsequent 2007 listing of the fashion house.", "citation_ids": ["src-sole", "src-ch-profile"], "salience": 0.9},
+      {"id": "cl-no-sanctions", "text": "No sanctions or PEP matches found for the identified individual.", "citation_ids": ["src-wd"], "salience": 0.6}
+    ],
+    "entities": [
+      {"name": "Isabella Ferretti", "kind": "person", "identifiers": {"wikidata": "Q5678901"}, "confidence": 0.88, "disambiguation_hint": "b.1968-milan-fashion"}
+    ],
+    "sources": [
+      {"id": "src-wd", "url": "https://www.wikidata.org/wiki/Q5678901", "tier": 2, "retrieved_at": "2026-03-20T14:00:00", "published_at": "2020-01-01T00:00:00", "publisher": "Wikidata"},
+      {"id": "src-sole", "url": "https://example.it/ilsole24ore/2019/ferretti-profile", "tier": 2, "retrieved_at": "2026-03-20T14:01:00", "published_at": "2019-06-20T00:00:00", "publisher": "Il Sole 24 Ore"},
+      {"id": "src-ch-profile", "url": "https://find-and-update.company-information.service.gov.uk/company/07771234", "tier": 1, "retrieved_at": "2026-03-20T14:02:00", "published_at": "2019-04-15T00:00:00", "publisher": "Companies House"},
+      {"id": "src-ch-directorship", "url": "https://find-and-update.company-information.service.gov.uk/officers/ferretti-i/appointments", "tier": 1, "retrieved_at": "2026-03-20T14:03:00", "published_at": "2019-04-15T00:00:00", "publisher": "Companies House"}
+    ],
+    "risk_scores": [
+      {"category": "background", "score": 18.0, "severity": "low", "confidence": 0.85, "rationale": "Birth year, birthplace, and early career consistent across sources.", "citation_ids": ["cl-bio", "cl-career"]},
+      {"category": "career", "score": 20.0, "severity": "low", "confidence": 0.85, "rationale": "Fashion house founding and 2007 listing independently sourced.", "citation_ids": ["cl-career"]},
+      {"category": "business_associations", "score": 30.0, "severity": "medium", "confidence": 0.75, "rationale": "Directorship disclosed and grounded; no other undisclosed associations found.", "citation_ids": ["cl-directorship"]},
+      {"category": "philanthropy", "score": 22.0, "severity": "low", "confidence": 0.70, "rationale": "Philanthropic activity consistent with stated profile.", "citation_ids": ["cl-philanthropy"]},
+      {"category": "source_of_wealth", "score": 38.0, "severity": "medium", "confidence": 0.72, "rationale": "Source of wealth corroborated in outline; full ownership structure not independently reconstructed.", "citation_ids": ["cl-sow", "cl-career"]},
+      {"category": "sanctions", "score": 2.0, "severity": "low", "confidence": 0.90, "rationale": "No sanctions matches.", "citation_ids": ["cl-no-sanctions"]},
+      {"category": "pep", "score": 8.0, "severity": "low", "confidence": 0.85, "rationale": "No PEP or close-associate matches.", "citation_ids": ["cl-no-sanctions"]}
+    ],
+    "timeline": [
+      {"id": "evt-founding-1994", "description": "Fashion house founded", "date": "1994-06-01", "date_precision": "day", "event_type": "incorporation", "citation_ids": ["src-sole"], "salience": 1.0},
+      {"id": "evt-ipo-2007", "description": "Fashion house listed on Milan exchange", "date": "2007-11-15", "date_precision": "day", "event_type": "listing", "citation_ids": ["src-sole"], "salience": 1.0},
+      {"id": "evt-directorship-2019", "description": "Non-executive directorship at UK retail group", "date": "2019-04-10", "date_precision": "day", "event_type": "directorship", "citation_ids": ["src-ch-directorship"], "salience": 0.9}
+    ]
+  },
+
+  "nonprofit-donor-0042": {
+    "case_id": "nonprofit-donor-0042",
+    "tenant": "env-charity-1",
+    "segment": "nonprofit",
+    "risk_framework_id": "nonprofit_donor@v1",
+    "executive_summary": "Kestrel Logistics GmbH and Nordwind Shipping AS are connected via a shared director, not a shareholding. A 2023 ESG controversy involving Nordwind is named in the charity's gift-acceptance policy as a screening trigger. Recommend declining the gift.",
+    "claims": [
+      {"id": "cl-reg-kestrel", "text": "Kestrel Logistics GmbH is registered in Germany with LEI 529900T8BM49AURSDO55.", "citation_ids": ["src-gleif-kestrel"], "salience": 1.0},
+      {"id": "cl-reg-nordwind", "text": "Nordwind Shipping AS is registered in Norway with LEI 5493001KJTIIGC8Y1R12.", "citation_ids": ["src-gleif-nordwind"], "salience": 1.0},
+      {"id": "cl-shared-director", "text": "Kestrel Logistics GmbH and Nordwind Shipping AS share a director, recorded in both companies' registers since 2016.", "citation_ids": ["src-handelsregister"], "salience": 1.0, "risk_category": "gift_acceptance_policy"},
+      {"id": "cl-no-sanctions", "text": "No sanctions matches found for either entity.", "citation_ids": ["src-gleif-kestrel", "src-gleif-nordwind"], "salience": 0.9, "risk_category": "sanctions"},
+      {"id": "cl-esg", "text": "Nordwind Shipping faced a 2023 environmental controversy regarding ballast-water discharge in a protected marine area.", "citation_ids": ["src-press-esg"], "salience": 0.8, "risk_category": "reputational"}
+    ],
+    "entities": [
+      {"name": "Kestrel Logistics GmbH", "kind": "org", "identifiers": {"lei": "529900T8BM49AURSDO55"}, "confidence": 0.95},
+      {"name": "Nordwind Shipping AS", "kind": "org", "identifiers": {"lei": "5493001KJTIIGC8Y1R12"}, "confidence": 0.94}
+    ],
+    "sources": [
+      {"id": "src-gleif-kestrel", "url": "https://search.gleif.org/#/record/529900T8BM49AURSDO55", "tier": 1, "retrieved_at": "2026-03-20T15:00:00", "published_at": "2012-05-01T00:00:00", "publisher": "GLEIF"},
+      {"id": "src-gleif-nordwind", "url": "https://search.gleif.org/#/record/5493001KJTIIGC8Y1R12", "tier": 1, "retrieved_at": "2026-03-20T15:01:00", "published_at": "2012-07-01T00:00:00", "publisher": "GLEIF"},
+      {"id": "src-handelsregister", "url": "https://www.handelsregister.de/rp_web/showdocument?docid=kestrel", "tier": 1, "retrieved_at": "2026-03-20T15:02:00", "published_at": "2016-09-15T00:00:00", "publisher": "Handelsregister"},
+      {"id": "src-press-esg", "url": "https://example.com/environment/2023/nordwind-ballast-water", "tier": 2, "retrieved_at": "2026-03-20T15:03:00", "published_at": "2023-08-25T00:00:00", "publisher": "Marine Environment Review"}
+    ],
+    "risk_scores": [
+      {"category": "reputational", "score": 55.0, "severity": "medium", "confidence": 0.80, "rationale": "2023 ESG controversy involving a linked entity; charity's gift policy names environmental controversies as screening triggers.", "citation_ids": ["cl-esg"]},
+      {"category": "sanctions", "score": 5.0, "severity": "low", "confidence": 0.90, "rationale": "No sanctions matches for either entity.", "citation_ids": ["cl-no-sanctions"]},
+      {"category": "gift_acceptance_policy", "score": 58.0, "severity": "medium", "confidence": 0.78, "rationale": "Shared-director relationship requires policy review; the ESG controversy is a named trigger.", "citation_ids": ["cl-shared-director", "cl-esg"]},
+      {"category": "source_of_wealth", "score": 38.0, "severity": "medium", "confidence": 0.65, "rationale": "Corporate structure partially reconstructed from primary registries; ownership chain beyond directorship not fully resolved.", "citation_ids": ["cl-reg-kestrel", "cl-reg-nordwind", "cl-shared-director"]}
+    ],
+    "timeline": [
+      {"id": "evt-incorporation-2011", "description": "Kestrel Logistics GmbH incorporated", "date": "2011-03-15", "date_precision": "day", "event_type": "incorporation", "citation_ids": ["src-handelsregister"], "salience": 1.0},
+      {"id": "evt-director-shared-2016", "description": "Shared director appointed across both entities", "date": "2016-09-01", "date_precision": "day", "event_type": "directorship", "citation_ids": ["src-handelsregister"], "salience": 1.0},
+      {"id": "evt-esg-controversy-2023", "description": "Nordwind ballast-water controversy reported", "date": "2023-08-20", "date_precision": "day", "event_type": "regulatory", "citation_ids": ["src-press-esg"], "salience": 0.8}
+    ]
+  },
+
+  "uni-donor-0231": {
+    "case_id": "uni-donor-0231",
+    "tenant": "uk-university-1",
+    "segment": "university",
+    "risk_framework_id": "university_donor@v1",
+    "executive_summary": "Ashford Family Foundation is a UK-registered charity. Hassan Ashford chairs the foundation. Limited source coverage; recommendation pending.",
+    "claims": [
+      {"id": "cl-charity-reg", "text": "Ashford Family Foundation is registered with the Charity Commission under number 1123456.", "citation_ids": ["src-cc"], "salience": 1.0},
+      {"id": "cl-chair", "text": "Hassan Ashford has been chair of the foundation since 2018.", "citation_ids": ["src-cc"], "salience": 0.8},
+      {"id": "cl-sanctions", "text": "No sanctions matches found for Hassan Ashford.", "citation_ids": ["src-blog"], "salience": 1.0, "risk_category": "sanctions"}
+    ],
+    "entities": [
+      {"name": "Ashford Family Foundation", "kind": "org", "identifiers": {"uk_charity": "1123456"}, "confidence": 0.88},
+      {"name": "Hassan Ashford", "kind": "person", "identifiers": {"wikidata": "Q8765432"}, "confidence": 0.75, "disambiguation_hint": "chair-2018-present"}
+    ],
+    "sources": [
+      {"id": "src-cc", "url": "https://register-of-charities.charitycommission.gov.uk/charity-search/-/charity-details/1123456", "tier": 1, "retrieved_at": "2026-03-20T12:00:00", "published_at": "2015-04-01T00:00:00", "publisher": "Charity Commission"},
+      {"id": "src-blog", "url": "https://example-blog.com/ashford-family-philanthropy", "tier": 4, "retrieved_at": "2026-03-20T12:01:00", "published_at": "2020-06-01T00:00:00", "publisher": "Personal blog"}
+    ],
+    "risk_scores": [
+      {"category": "reputational", "score": 35.0, "severity": "medium", "confidence": 0.60, "rationale": "Some reputational coverage in unvetted sources.", "citation_ids": ["cl-sanctions"]},
+      {"category": "sanctions", "score": 10.0, "severity": "low", "confidence": 0.50, "rationale": "No sanctions matches found in the sources consulted.", "citation_ids": ["cl-sanctions"]},
+      {"category": "gift_acceptance_policy", "score": 40.0, "severity": "medium", "confidence": 0.55, "rationale": "Gift would need policy review.", "citation_ids": ["cl-charity-reg"]},
+      {"category": "source_of_wealth", "score": 45.0, "severity": "medium", "confidence": 0.55, "rationale": "Source of wealth not independently corroborated.", "citation_ids": ["cl-charity-reg"]}
+    ],
+    "timeline": [
+      {"id": "evt-charity-reg-2015", "description": "Charity registered", "date": "2015-04-01", "date_precision": "day", "event_type": "registration", "citation_ids": ["src-cc"], "salience": 1.0},
+      {"id": "evt-chair-2018", "description": "Hassan Ashford appointed chair", "date": "2018-03-20", "date_precision": "day", "event_type": "appointment", "citation_ids": ["src-cc"], "salience": 0.8}
+    ]
+  }
+}

@@ -1,13 +1,13 @@
 {
   "version": "v2",
   "created": "2026-03-14T09:00:00Z",
-  "hash": "sha256:sha256:27c355efd03da7ce",
-  "case_count": 412,
+  "hash": "sha256:27c355efd03da7ce",
+  "case_count": 5,
   "changelog": [
     "v2: added 38 UBO / beneficial-ownership cases after MENA expansion",
     "v2: tightened source-tier expectations for aggregator citations",
     "v2: removed 4 cases whose golden answer was itself wrong (see #2291)",
     "v2: split 'sanctions' tag into 'sanctions_primary' and 'sanctions_secondary'"
   ],
-  "owners": ["quality-eng", "risk-intel"]
+  "owners": ["dudaiyan"]
 }

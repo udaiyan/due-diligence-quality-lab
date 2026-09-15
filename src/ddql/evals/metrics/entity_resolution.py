@@ -15,6 +15,12 @@ from dataclasses import dataclass, field
 
 from ddql.types import Entity
 
+# ECE is a population metric. Below this many predicted entities the bin
+# structure collapses and the number stops meaning anything — a single
+# confident-correct entity produces ECE 0.12 whether the model is
+# well-calibrated or not. Above this threshold it's a real signal.
+MIN_SAMPLES_FOR_ECE = 5
+
 
 @dataclass(frozen=True, slots=True)
 class DisambiguationReport:
@@ -156,8 +162,13 @@ def failures(report: ResolutionReport) -> list[str]:
         value = getattr(report, metric)
         if value < THRESHOLDS[metric]:
             out.append(f"entity_resolution.{metric} {value:.3f} < {THRESHOLDS[metric]}")
-    if report.ece > THRESHOLDS["ece"]:
-        out.append(f"entity_resolution.ece {report.ece:.3f} > {THRESHOLDS['ece']}")
+
+    n_predicted = report.true_positives + report.false_positives
+    if n_predicted >= MIN_SAMPLES_FOR_ECE and report.ece > THRESHOLDS["ece"]:
+        out.append(
+            f"entity_resolution.ece {report.ece:.3f} > {THRESHOLDS['ece']} "
+            f"(n={n_predicted})"
+        )
 
     d = report.disambiguation
     if d.same_name_accuracy and d.same_name_accuracy < THRESHOLDS["same_name_accuracy"]:
