@@ -105,7 +105,7 @@ class Harness:
                         failures=(f"no output produced for case {case.id}",),
                         dataset_hash=dataset_hash,
                         layers_run=(),
-                        layers_skipped=tuple(l.name for l in self._layers),
+                        layers_skipped=tuple(layer.name for layer in self._layers),
                         duration_ms=0,
                     )
                 )

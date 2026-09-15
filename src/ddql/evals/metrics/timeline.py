@@ -16,6 +16,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import dataclass
+from datetime import datetime
 
 from ddql.types import Source, TimelineEvent
 
@@ -107,19 +108,23 @@ def _anachronism_rate(
     by_id = {s.id: s for s in sources}
     anachronistic = 0
     for e in dated:
-        pubs = [
-            by_id[sid].published_at
-            for sid in e.citation_ids
-            if sid in by_id and by_id[sid].published_at is not None
-        ]
+        pubs: list[datetime] = []
+        for sid in e.citation_ids:
+            src = by_id.get(sid)
+            if src is not None and src.published_at is not None:
+                pubs.append(src.published_at)
         if not pubs:
             continue
-        if e.date < min(pubs).date():  # type: ignore[operator]
+        if e.date is not None and e.date < min(pubs).date():
             anachronistic += 1
     return anachronistic / len(dated)
 
 
-def _precision_of(dt) -> int:
+def _precision_of(dt: datetime | None) -> int:
+    """Approximate precision of a datetime. In production, the extractor
+    supplies this; here it's a fallback."""
+    if dt is None:
+        return _PRECISION_ORDER["year"]
     return _PRECISION_ORDER["day"]
 
 

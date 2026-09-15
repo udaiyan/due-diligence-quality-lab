@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from datetime import date, datetime
+
 import pytest
 
 from ddql.types import (
@@ -14,7 +16,6 @@ from ddql.types import (
     Source,
     TimelineEvent,
 )
-from datetime import date, datetime
 
 
 @pytest.fixture

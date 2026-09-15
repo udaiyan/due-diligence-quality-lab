@@ -8,7 +8,10 @@ the rest.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Protocol
+from typing import TYPE_CHECKING, Protocol
+
+if TYPE_CHECKING:
+    from ddql.evals.judges.llm_judge import LLMJudge
 
 from ddql.evals.metrics import entity_resolution as er
 from ddql.evals.metrics import groundedness as gnd
@@ -189,7 +192,7 @@ class L1Automated:
 class L2LLMJudge:
     name = "L2"
 
-    def __init__(self, judge=None) -> None:
+    def __init__(self, judge: LLMJudge | None = None) -> None:
         self._judge = judge
 
     def evaluate(self, case: EvalCase, output: InvestigationOutput) -> LayerResult:

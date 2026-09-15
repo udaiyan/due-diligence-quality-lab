@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from datetime import date, datetime
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from ddql.types import Entity, EvalCase, Segment
 
@@ -26,7 +26,7 @@ def load_cases(path: Path) -> list[EvalCase]:
     return cases
 
 
-def _to_eval_case(raw: dict) -> EvalCase:
+def _to_eval_case(raw: dict[str, Any]) -> EvalCase:
     return EvalCase(
         id=raw["id"],
         query=raw["query"],
@@ -46,7 +46,7 @@ def _to_eval_case(raw: dict) -> EvalCase:
     )
 
 
-def _to_entity(raw: dict) -> Entity:
+def _to_entity(raw: dict[str, Any]) -> Entity:
     return Entity(
         name=raw["name"],
         kind=raw["kind"],
@@ -56,7 +56,7 @@ def _to_entity(raw: dict) -> Entity:
     )
 
 
-def to_investigation_output(raw: dict) -> "InvestigationOutput":
+def to_investigation_output(raw: dict[str, Any]) -> InvestigationOutput:
     from ddql.types import (
         Claim,
         InvestigationOutput,

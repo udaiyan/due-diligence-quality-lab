@@ -13,12 +13,11 @@ example.
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
-from typing import Protocol
+from typing import Any, Protocol
 
 
 class FlakeClass(StrEnum):
@@ -41,10 +40,14 @@ class Triage:
 
 
 class TriageBackend(Protocol):
-    def classify(self, *, test_id: str, trace_summary: str) -> dict: ...
+    def classify(
+        self, *, test_id: str, trace_summary: str
+    ) -> dict[str, Any]: ...
 
 
-def _looks_like_selector_drift(history: list[dict], trace: str) -> bool:
+def _looks_like_selector_drift(
+    history: list[dict[str, Any]], trace: str
+) -> bool:
     if "TimeoutError" not in trace and "not found" not in trace.lower():
         return False
     recent = history[-10:]
@@ -56,7 +59,9 @@ def _looks_like_selector_drift(history: list[dict], trace: str) -> bool:
     return pass_then_fail and "locator" in trace.lower()
 
 
-def _looks_like_timing(history: list[dict], trace: str) -> bool:
+def _looks_like_timing(
+    history: list[dict[str, Any]], trace: str
+) -> bool:
     statuses = [h["status"] for h in history[-20:]]
     if not statuses:
         return False
@@ -64,7 +69,9 @@ def _looks_like_timing(history: list[dict], trace: str) -> bool:
     return flaky and ("waiting for" in trace.lower() or "race" in trace.lower())
 
 
-def _looks_like_data_state(history: list[dict], trace: str) -> bool:
+def _looks_like_data_state(
+    history: list[dict[str, Any]], trace: str
+) -> bool:
     if not history:
         return False
     passes_alone = any(
@@ -76,7 +83,9 @@ def _looks_like_data_state(history: list[dict], trace: str) -> bool:
     return passes_alone and fails_together
 
 
-def _looks_like_infra(history: list[dict], trace: str) -> bool:
+def _looks_like_infra(
+    history: list[dict[str, Any]], trace: str
+) -> bool:
     markers = ("502", "503", "504", "ECONNRESET", "ENOTFOUND", "dial tcp")
     return any(m in trace for m in markers)
 
@@ -116,7 +125,7 @@ def triage(
     *,
     test_id: str,
     trace: str,
-    history: list[dict],
+    history: list[dict[str, Any]],
     backend: TriageBackend | None = None,
 ) -> Triage:
     trace_summary = _summarise(trace)

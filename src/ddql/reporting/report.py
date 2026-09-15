@@ -11,9 +11,10 @@ from __future__ import annotations
 import json
 from collections.abc import Sequence
 from dataclasses import asdict
+from typing import Any
 
 from ddql.evals.datasets.versioning import Manifest
-from ddql.evals.harness import summarise, summarise_by_segment
+from ddql.evals.harness import summarise_by_segment
 from ddql.evals.metrics.risk_calibration import explain as explain_risk
 from ddql.evals.metrics.timeline import explain as explain_timeline
 from ddql.types import CaseReport
@@ -21,7 +22,7 @@ from ddql.types import CaseReport
 
 def to_json(
     reports: Sequence[CaseReport],
-    summary: dict,
+    summary: dict[str, Any],
     manifest: Manifest,
 ) -> str:
     payload = {
@@ -49,7 +50,7 @@ def to_json(
 
 def to_markdown(
     reports: Sequence[CaseReport],
-    summary: dict,
+    summary: dict[str, Any],
     manifest: Manifest,
 ) -> str:
     if not reports:

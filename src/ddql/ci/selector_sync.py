@@ -12,7 +12,7 @@ the old one.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
 
 
 @dataclass(frozen=True, slots=True)
@@ -27,8 +27,7 @@ class SelectorSyncProposal:
 class ProposalBackend(Protocol):
     def propose(
         self, *, test_id: str, trace: str, dom_diff: str, old_selector: str
-    ) -> dict: ...
-
+    ) -> dict[str, Any]: ...
 
 def propose_selector_sync(
     *,

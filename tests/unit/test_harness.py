@@ -1,5 +1,5 @@
 from ddql.evals.harness import Harness, summarise
-from ddql.evals.layers import Layer, LayerResult
+from ddql.evals.layers import LayerResult
 from ddql.types import EvalCase, InvestigationOutput, Segment, Verdict
 
 

@@ -13,14 +13,16 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
 
 from ddql.evals.judges.rubric import GROUNDEDNESS_V3_1, Rubric
 from ddql.types import Claim, ClaimVerdict, Source
 
 
 class JudgeBackend(Protocol):
-    def score(self, *, prompt: str, schema: dict) -> dict: ...
+    def score(
+        self, *, prompt: str, schema: dict[str, Any]
+    ) -> dict[str, Any]: ...
 
 
 @dataclass(frozen=True, slots=True)
@@ -32,10 +34,11 @@ class JudgeConfig:
 
 
 class NullBackend:
-    """Returns neutral scores. Used when no API key is configured — CI runs
-    L0+L1 without an LLM and only L2 when the key is present."""
+    """Returns neutral scores. Used when no API key is configured."""
 
-    def score(self, *, prompt: str, schema: dict) -> dict:
+    def score(
+        self, *, prompt: str, schema: dict[str, Any]
+    ) -> dict[str, Any]:
         return {"score": 0.5, "confidence": 0.0, "rationale": "null backend"}
 
 
@@ -45,20 +48,26 @@ class AnthropicBackend:
         self._client = anthropic.Anthropic()
         self._model = model
 
-    def score(self, *, prompt: str, schema: dict) -> dict:
+    def score(
+        self, *, prompt: str, schema: dict[str, Any]
+    ) -> dict[str, Any]:
         msg = self._client.messages.create(
             model=self._model,
             max_tokens=512,
             messages=[{"role": "user", "content": prompt}],
         )
-        text = msg.content[0].text  # type: ignore[union-attr]
+        text = msg.content[0].text
+        result: dict[str, Any]
         try:
-            data = json.loads(text)
+            parsed = json.loads(text)
         except json.JSONDecodeError:
-            data = {"score": 0.5, "confidence": 0.0, "rationale": "parse failure"}
-        data.setdefault("model", self._model)
-        return data
-
+            parsed = None
+        if not isinstance(parsed, dict):
+            result = {"score": 0.5, "confidence": 0.0, "rationale": "parse failure"}
+        else:
+            result = parsed
+        result.setdefault("model", self._model)
+        return result
 
 def build_default_judge() -> LLMJudge | None:
     """Reads DDQL_JUDGE env var. Returns None if no judge is configured —
@@ -134,7 +143,7 @@ class LLMJudge:
         cited: list[Source],
         *,
         role: str,
-    ) -> dict:
+    ) -> dict[str, Any]:
         prompt = self._build_prompt(claim, cited, role=role)
         schema = {
             "type": "object",
