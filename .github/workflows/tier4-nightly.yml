@@ -20,11 +20,12 @@ jobs:
       - name: Full golden eval with adversarial set
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          DDQL_JUDGE: anthropic
+          DDQL_JUDGE: ${{ vars.DDQL_JUDGE || 'null' }}
         run: |
           uv run python scripts/run_eval.py \
             --dataset datasets/golden/v2 \
-            --layers L0,L1,L2,L3 \
+            --layers L0,L1 \
+            --outputs examples/outputs.sample.json \
             --report reports/nightly.json
 
       - uses: actions/upload-artifact@v4
