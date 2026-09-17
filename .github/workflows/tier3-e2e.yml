@@ -1,8 +1,10 @@
 name: T3 — E2E matrix
 
+# Manual only. Requires a running staging environment plus the
+# DDQL_TEST_PASSWORD secret and STAGING_URL variable. See
+# docs/claude-code-workflow.md.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   e2e:
