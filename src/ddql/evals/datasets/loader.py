@@ -15,7 +15,9 @@ if TYPE_CHECKING:
 
 def load_cases(path: Path) -> list[EvalCase]:
     cases: list[EvalCase] = []
-    for lineno, line in enumerate(path.read_text().splitlines(), start=1):
+    for lineno, line in enumerate(
+        path.read_text(encoding="utf-8").splitlines(), start=1
+    ):
         if not line.strip():
             continue
         try:

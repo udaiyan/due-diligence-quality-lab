@@ -30,10 +30,14 @@ def main() -> int:
         return 1
 
     new_hash = compute_hash(cases_path)
-    manifest = json.loads(manifest_path.read_text())
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     old_hash = manifest.get("hash", "")
     manifest["hash"] = new_hash
-    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
     if old_hash == new_hash:
         print(f"hash already correct: {new_hash}")
