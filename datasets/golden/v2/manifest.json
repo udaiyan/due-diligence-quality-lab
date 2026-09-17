@@ -9,5 +9,7 @@
     "v2: removed 4 cases whose golden answer was itself wrong (see #2291)",
     "v2: split 'sanctions' tag into 'sanctions_primary' and 'sanctions_secondary'"
   ],
-  "owners": ["dudaiyan"]
+  "owners": [
+    "dudaiyan"
+  ]
 }
