@@ -105,11 +105,10 @@ def _anachronism_rate(
     """Fraction of dated events whose date is AFTER their earliest cited
     source's publication.
 
-    A source published in 2015 cannot support an event dated 2020 — it
+    A source published in 2015 cannot support an event dated 2020 - it
     cannot know about the future. The inverse (event before source) is
     not anachronistic: a 2022 news article legitimately documents a 1971
-    birth, and a 2021 Companies House filing legitimately records a 2015
-    directorship.
+    birth.
 
     The earlier version of this check had the comparison inverted, which
     flagged retrospective sourcing as anachronism. See ADR-005.
@@ -120,6 +119,11 @@ def _anachronism_rate(
     by_id = {s.id: s for s in sources}
     anachronistic = 0
     for e in dated:
+        if e.date is None:
+            # mypy doesn't narrow date | None through the list-comprehension
+            # filter above, so re-check here. The filter guarantees this
+            # branch is unreachable at runtime.
+            continue
         pubs: list[datetime] = []
         for sid in e.citation_ids:
             src = by_id.get(sid)
@@ -131,7 +135,6 @@ def _anachronism_rate(
         if e.date > earliest.date():
             anachronistic += 1
     return anachronistic / len(dated)
-
 
 def _precision_of(dt: datetime | None) -> int:
     """Approximate precision of a datetime. In production, the extractor
